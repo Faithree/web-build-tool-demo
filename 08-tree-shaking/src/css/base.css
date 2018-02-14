@@ -1,0 +1,24 @@
+h1 {
+    background-color: yellow;
+}
+h2 {
+    background-color: red;
+}
+h3 {
+    background-color: blue;
+}
+.demo {
+    background-color: black;
+}
+/* css autoprefixer*/
+.border {
+    border: 2px solid green;
+    transform: translate(10px, 20px);
+}
+/*css next*/
+:root {
+    --redColor : red;
+}
+h3 {
+    color:var(--redColor);
+}
