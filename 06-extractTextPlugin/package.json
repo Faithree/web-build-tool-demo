@@ -1,5 +1,5 @@
 {
-  "name": "05-css&style",
+  "name": "06-extractTextPlugin",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,6 @@
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^0.28.9",
-    "file-loader": "^1.1.6",
     "less": "^3.0.0",
     "less-loader": "^4.0.5",
     "style-loader": "^0.20.1",
