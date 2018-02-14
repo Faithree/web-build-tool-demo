@@ -1,0 +1,15 @@
+h1 {
+    background-color: yellow;
+}
+/* css autoprefixer*/
+.border {
+    border: 2px solid green;
+    transform: translate(10px, 20px);
+}
+/*css next*/
+:root {
+    --redColor : red;
+}
+h3 {
+    color:var(--redColor);
+}
