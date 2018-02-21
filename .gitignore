@@ -5,7 +5,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /13-eslint/
-/12-web-dev-server/
 
 # Editor directories and files
 .idea
