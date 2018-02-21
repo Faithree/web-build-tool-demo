@@ -6,8 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 /13-eslint/
 /12-web-dev-server/
-/11-htmlWebpackPlugin/
-/10-引入第三方库/s
+
 # Editor directories and files
 .idea
 .vscode
