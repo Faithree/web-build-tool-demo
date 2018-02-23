@@ -6,7 +6,6 @@ module.exports = {
   },
   output: {
     path: __dirname + '/dist',
-    publicPath: 'dist/',
     filename: 'bundle.js'
   },
   module: {
@@ -34,13 +33,16 @@ module.exports = {
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
-                plugins: [
-                  // require('autoprefixer')(),
-                  // require('cssnano')(),
-                  // require('postcss-cssnext')()
-                ]
+                plugins: function(){
+                  return [
+                    require('postcss-sprites')({
+                      spritePath: 'dist/img/sprites',
+                      retina: true
+                    })
+                  ]
+                }
               }
-            },]
+            }]
         })
       }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -76,23 +78,12 @@ module.exports = {
                 ]
               }
             }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('postcss-sprites')({
-                  spritePath: 'dist/img/sprites',
-                  retina: true
-                })
-              ]
-            }
           }
         ]
       }]
   },
   plugins: [
+    
     // new ExtractTextPlugin("[name].[contenthash:8].css"),
     new extractTextWebpackPlugin({
       filename: '[name].min.css',

@@ -23,17 +23,17 @@ h3 {
     color:var(--redColor);
 }
 .bg1 {
-    width: 400px;
-    height: 400px;
-    background-image: url(../img/01.png);
+    width: 200px;
+    height: 200px;
+    background-image: url(../img/01@2x.png);
 }
 .bg2 {
-    width: 400px;
-    height: 400px;
-    background-image: url(../img/02.png);
+    width: 200px;
+    height: 200px;
+    background-image: url(../img/02@2x.png);
 }
 .bg3 {
-    width: 400px;
-    height: 400px;
-    background-image: url(../img/03.png);
+    width: 200px;
+    height: 200px;
+    background-image: url(../img/03@2x.png);
 }
