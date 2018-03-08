@@ -85,7 +85,13 @@ npm install less less-loader -D
 npm install sass node-sass -D
 ```
 ## extractTextPlugin
-
+```
+当入口文件前面有js，例如 './js/app': resolve(__dirname, './index.js'),
+就要用下面这种方式
+ filename: (getPath) => {
+        return getPath('./css/[name].css').replace('./js/', '')
+      }
+```
 ## postCss
 ```
 postcss
@@ -125,6 +131,12 @@ package.json里配置一份，所有插件都共用
 使用场景：常规优化减小体积，引用第三方库的部分功能
 
 ## js shaking
+* esm
+* webpack打包 (使用rollup打包JavaScript库支持esm导出，支持语法流程分析，用module，不然就是类似element的做法,或者说后编译)
+* 依赖性强 
+* uglifyjs
+* babel(for...of 等)开启babel的loose模式
+
 当引入第三方库不支持tree-shaking 的时候，先去找一找有没有es版本，假如还不支持，可以试试babel-plugin
 ## css shaking
 ```
@@ -229,10 +241,43 @@ npm install url-loader img-loader file-loader postcss-sprites -D
         ]
       }
 ```
+
+### resolve 
+```
+ resolve: {
+    extensions: ['.js'],
+    alias: {
+      '~': resolve(__dirname, './comps')
+    },
+    modules: ['node_modules', resolve(__dirname, './my_modules')]
+  }
+```
 ### alias 
 root:'d:' //子站公共的库
-### external 
+### externals 
 配合provider插件可以实现cdn的功能
+在一些场景下，例如自己手写一个库，并且引入了第三方库，则必须使用external引入第三方库，避免第三方库打包进自己的库
+### 手写一个库
+```
+const webpack = require('webpack')
+const { resolve } = require('path')
+
+module.exports = {
+  entry: resolve(__dirname, './index.js'),
+  output: {
+    path: resolve(__dirname, 'dist'),
+    filename: '[name].js',
+    library: 'myLib', // 使用的时候import mylib from 'mylib'
+    libraryTarget: 'umd'
+  },
+  externals: {
+    moduleExt: resolve(__dirname, './external_modules/ext_module.js')// 并不想把别人的库也打包进来,但是保留对这个库的引用
+  }
+}
+
+调用 
+import mylib from 'mylib'
+```
 ## 引入第三方js库
 * webpack.providePlugin结合alias 
 * imports-loader(自动)结合alias 
@@ -273,7 +318,10 @@ npm install html-webpack-inline-chunk-plugin
 * webpack-dev-server
 * express-webpack-dev-middlewawre
 
-webpack-dev-server是个很强大的工具,他就是一个简易的服务器，所以他有很多服务器的功能，例如接口代理，https，路径重定向，live reloading 
+webpack-dev-server是个很强大的工具,他就是一个简易的服务器，所以他有很多服务器的功能，例如接口代理，https，路径重定向，live reloading
+```
+contentBase功能类似打包后的路径，不过是从内存中读取，其实没什么鸟用，但是要用绝对路径
+```
 
 history模式
 ```
@@ -318,6 +366,7 @@ css热更新，假如使用了extract,页面是不会改变的(本质以来了sa
 js热更新需要加上hotOnly: true
 并且代码内要使用module.hot来判断，通过module.hot.accept来热更新
 合理使用accept的回掉函数进行移除和添加dom
+
 ```
 ## sourceMap
 * js Devtool
@@ -385,7 +434,16 @@ npm install webpack-bundle-analyzer
 动态模块要命名
 ## 路径问题
 路径问题假如解决不了，一律用http服务器的思路去解决，直接指定跟目录'/'
-
+## loader
+loader职责单一原则
+```
+自定义loader路径
+ resolveLoader: {
+    modules: ['node_modules', resolve(__dirname, 'loaders')]
+  },
+```
+## plugin
+ Compilation是从Compiler派生出来的(可以理解为继承)，并且会携带一些构建时候加入的东西
 ## 补充(一个新的脚手架工具)
 全局安装[webpack-cli](https://github.com/webpack/webpack-cli)
 ```
@@ -397,8 +455,33 @@ npm install webpack-cli -g
 * Migration from webpack v1 to v2(升级迁移版本)
 
 ## webpack 4 beta
+```
+npm install webpack webpack-cli --save-dev
+```
+不需要任何的配置文件，直接输入命令npm start就可以打包到/dist/main.js,默认mode:production
+
+![](https://user-gold-cdn.xitu.io/2018/3/1/161e1044280023b8?w=1038&h=366&f=png&s=32749)
+
+打包结果输出不一样
+webpack3以前是一个自执行函数，参数是一个数组，数组的作用就是顺序递归调用每一个函数，根据数组的索引，最后结束时还是第一个函数
+![](https://user-gold-cdn.xitu.io/2018/3/1/161e14b0689ca8d1?w=1463&h=948&f=png&s=143345)
+而webpack4的自执行函数不再是数组了，而是一个对象，键的一个路径，递归调用也明显不再是根据id来调用了，而是根据这个键,个人觉得键值对的方式更好，因为webpack3之前是一个排好序的数组，这个数组排序，尤其是多层嵌套的情况下，应该是比较消耗性能的
+![](https://user-gold-cdn.xitu.io/2018/3/1/161e1642a72e40a5?w=2373&h=950&f=png&s=174780)
 ## 总结
 
 1. 编译 打包 hmr 代码分割 文件处理
 2. tree shaking es module 动态import
 3. scope hoisting(打包以后性能提升)  magic comments
+4.Mode, 零配置以及默认值
+```
+webpack 4之前，js 是 webpack 中的唯一模块类型，因而不能有效地打包其它类型的文件。而 webpack 4 则提供了 5 种模块类型：
+ module: {
+    rules: [{
+        test: /\.special\.json$/,
+        type: "javascript/auto",
+        use: "special-loader"
+    }]
+ }
+```
+### 手写webpack
+npm link 
