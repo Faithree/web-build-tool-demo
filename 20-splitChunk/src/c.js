@@ -1,4 +1,3 @@
-import CM from './commonModule'
 export default `/*!
  * Vue.js v2.5.16
  * (c) 2014-2018 Evan You

@@ -485,3 +485,6 @@ webpack 4之前，js 是 webpack 中的唯一模块类型，因而不能有效�
 ```
 ### 手写webpack
 npm link 
+
+### splitChunk
+spa的话直接用node_modules那一套就可以匹配，多页面尽量用all自动配置，抽离的话就在下面加组，一个页面里面需要分离多个Chunks的话priority会影响打包生成的chunk的(试试demo)，一般来说公共库第一，基础库紧跟其后，但是不一定，顺序可以调一下，总的来说这个插件有点坑，可配置性太差了
