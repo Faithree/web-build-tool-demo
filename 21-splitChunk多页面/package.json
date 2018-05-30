@@ -1,0 +1,23 @@
+{
+  "name": "21-splitChunk-Multi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "Faithree <359790031@qq.com> (http://github.com/Faithree)",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.10.1",
+    "webpack-cli": "^2.1.4"
+  },
+  "dependencies": {
+    "element-ui": "^2.4.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "vue": "^2.5.16"
+  }
+}
