@@ -1,0 +1,18 @@
+{
+  "name": "babel-polyfill按需引入(beta)",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
+    "@babel/runtime": "^7.0.0-beta.55",
+    "babel-loader": "^8.0.0-beta.4",
+    "babel-polyfill": "^7.0.0-beta.3",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
+  },
+  "scripts": {
+    "start": "webpack"
+  },
+  "dependencies": {}
+}
