@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["ie 6-8"]
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "plugins": ["@babel/transform-runtime"]
+}
