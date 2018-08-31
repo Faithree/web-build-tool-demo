@@ -1,0 +1,25 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 5 versions"]
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    [
+      "@babel/transform-runtime",
+      {
+        "helpers": false,
+        "regenerator": true
+      }
+    ]
+  ]
+} 
