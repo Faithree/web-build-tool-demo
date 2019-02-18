@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    [
+      "./src/index.js",
+      {
+        "option1": true,
+        "option2": false
+      }
+    ]
+  ]
+}
