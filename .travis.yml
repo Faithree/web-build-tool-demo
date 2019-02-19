@@ -1,0 +1,5 @@
+language: node_js
+node_js: stable  #设置相应的版本
+sudo: false
+
+script: true
