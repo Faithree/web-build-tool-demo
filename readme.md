@@ -7,9 +7,11 @@
 >教程自动忽略命令行的形式，一律采用配置文件的方式,使用npm
 
 安装
-```
-npm install webpack -g
-```
+
+* 进入每一个目录，npm install
+* 查看package.json 执行script里面的命令
+* 如果简单的demo没有命令，则npm install webpack -g
+* 有些命令是webpack3的 注意区分
 
 ## Babel
 ```
