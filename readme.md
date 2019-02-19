@@ -1,3 +1,7 @@
+# web-build-tool-demo 
+
+[![Build Status](https://travis-ci.org/Faithree/web-build-tool-demo.svg?branch=master)](https://travis-ci.org/Faithree/web-build-tool-demo)
+
 >本仓库持续更新
 
 >教程自动忽略命令行的形式，一律采用配置文件的方式,使用npm
