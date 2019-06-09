@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+// 用户交互
+const program = require('commander');
+// 命令后颜色
+const Printer = require('@darkobits/lolcatjs');
+
+//  用户交互
+const inquirer = require('inquirer');
+// shelljs
+
+const shelljs = require('shelljs');
+// loading
+const ora = require('ora');
+// 下载git
+const download = require('download-git-repo');
+const template = 'direct:https://github.com/Faithree/js-';
+
+program.version(
+  Printer.default.fromString(`
+  _______           _       
+  (  ____ \|\     /|( (    /| 
+  | (    \/| )   ( ||  \  ( |
+  | (_____ | |   | ||   \ | |
+  (_____  )| |   | || (\ \) |
+        ) || |   | || | \   |
+  /\____) || (___) || )  \  |
+  \_______)(_______)|/    )_)
+    `),
+  '-v, --version'
+);
+
+const bindHandler = {
+  init() {
+    console.log('init');
+    inquirer
+      .prompt([
+        /* Pass your questions in here */
+        {
+          type: 'text',
+          message: 'project name',
+          name: 'dirname'
+        },
+        {
+          type: 'list',
+          message: 'choose language typescript or javascript?',
+          choices: ['typescript', 'javascript'],
+          name: 'kind'
+        }
+      ])
+      .then(answers => {
+        // Use user feedback for... whatever!!
+        console.log('dirname' + answers.dirname);
+        const dirname = answers.dirname;
+        const kind = answers.kind;
+        if (dirname) {
+          const spinner = ora('下载初始化模版......');
+          spinner.start();
+          const projectPath = `${__dirname}/${dirname}`;
+          shelljs.cd(`${__dirname}/`);
+          shelljs.rm('-rf', projectPath);
+          shelljs.mkdir(dirname);
+          // 下载github 项目
+          download(template, projectPath, { clone: true }, err => {
+            spinner.stop();
+            if (err) {
+              console.error('下载失败', error.message);
+            } else {
+              // shelljs.sed('-i', 'js-', dirname, projectPath + '/package.json');
+              console.log('项目创建成功');
+            }
+          });
+        }
+      });
+  }
+};
+// 用户对话
+const chalk = require('chalk');
+program
+  .usage('[cmd] <options>')
+  .arguments('<cmd> [env]')
+  .action((cmd, otherParams) => {
+    const handler = bindHandler[cmd];
+    if (handler) {
+      handler(otherParams);
+    } else {
+      console.log(`${chalk.yellow('没有命令') + chalk.red(cmd)}`);
+      process.exit(1);
+    }
+  });
+program.parse(process.argv);
