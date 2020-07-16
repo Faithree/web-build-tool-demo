@@ -18,7 +18,7 @@
     "glob-all": "^3.1.0",
     "less": "^3.0.0",
     "less-loader": "^4.0.5",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.19",
     "postcss": "^6.0.17",
     "postcss-cssnext": "^3.1.0",
     "postcss-loader": "^2.1.0",
