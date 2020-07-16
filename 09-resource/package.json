@@ -16,7 +16,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "img-loader": "^2.0.1",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.19",
     "postcss": "^6.0.17",
     "postcss-loader": "^2.1.0",
     "postcss-sprites": "^4.2.1",
