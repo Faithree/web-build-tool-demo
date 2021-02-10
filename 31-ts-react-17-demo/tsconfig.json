@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "build/dist",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"],
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "mock/**/*",
+    "src/**/*",
+    "config/**/*",
+    "typings.d.ts"
+  ]
+}
